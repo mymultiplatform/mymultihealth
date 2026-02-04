@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>mymultihealth.com</title>
 
-  <!-- Fuente estilo editorial (muy parecida al "Próximo lanzamiento") -->
+  <!-- Fuente elegante tipo la de tu ejemplo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,74 +14,61 @@
     :root{
       --txt:#f7f2e8;
       --muted:rgba(247,242,232,.82);
-      --shadow: 0 30px 90px rgba(0,0,0,.55);
       --line: rgba(247,242,232,.35);
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
+      --img: url("https://blogger.googleusercontent.com/img/a/AVvXsEjFjKk2Ml7Pn20K-zZJ9LZUCEjAQ7JfI84wzNpdhY4doYqAH3XjkjsYYKTVk-PBGbflqkEGwAoq49EZ8zG0YnpDioL0cdgceTr9PoL9OO538vPywGEr_loK3ow3Y8Pw8u1U4n1WSIqifkYEDTtTXc0PCy0bCJsbDfjwyOcV0KVAYR9K30yZj7nP-2jZDP4v");
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       color:var(--txt);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:#06140e;
+      background:#000;
       overflow-x:hidden;
     }
 
-    /* ===== FONDO AMAZONICO (sin imágenes) ===== */
+    /* ===== BACKGROUND (imagen) ===== */
     .bg{
       position:fixed;
       inset:0;
       z-index:-3;
-      background:
-        radial-gradient(1200px 800px at 70% 0%, rgba(140,255,205,.18), transparent 55%),
-        radial-gradient(1000px 700px at 10% 20%, rgba(40,180,120,.22), transparent 60%),
-        linear-gradient(180deg, #06140e 0%, #081a12 35%, #040b08 100%);
+      background-image: var(--img);
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.03); /* evita bordes blancos al blur */
     }
 
-    /* neblina / humedad */
-    .mist{
+    /* ===== PERIMETRO BORROSO =====
+       Capa con la misma imagen, blur, y máscara para afectar SOLO los bordes */
+    .bg-blur{
       position:fixed;
-      inset:-20%;
+      inset:-2%;
       z-index:-2;
-      background:
-        radial-gradient(closest-side at 30% 40%, rgba(255,255,255,.08), transparent 60%),
-        radial-gradient(closest-side at 70% 55%, rgba(255,255,255,.06), transparent 62%),
-        radial-gradient(closest-side at 45% 75%, rgba(255,255,255,.05), transparent 65%);
+      background-image: var(--img);
+      background-size: cover;
+      background-position: center;
       filter: blur(18px);
-      opacity:.65;
-      animation: drift 18s ease-in-out infinite alternate;
-    }
-    @keyframes drift{
-      from{ transform: translate3d(-2%, -1%, 0) }
-      to{   transform: translate3d( 2%,  1%, 0) }
+      transform: scale(1.08);
+
+      /* Máscara: centro nítido (transparent), bordes visibles (black) */
+      -webkit-mask-image: radial-gradient(circle at 50% 45%, transparent 0 46%, black 68% 100%);
+      mask-image: radial-gradient(circle at 50% 45%, transparent 0 46%, black 68% 100%);
+      opacity: .95;
     }
 
-    /* hojas gigantes (siluetas) */
-    .leaves{
+    /* Oscurecer un poco para que el texto se lea */
+    .overlay{
       position:fixed;
       inset:0;
       z-index:-1;
-      opacity:.85;
-      pointer-events:none;
       background:
-        radial-gradient(140px 420px at 8% 55%, rgba(0,0,0,.55), transparent 70%),
-        radial-gradient(160px 520px at 16% 65%, rgba(0,0,0,.50), transparent 72%),
-        radial-gradient(220px 700px at 92% 55%, rgba(0,0,0,.55), transparent 70%),
-        radial-gradient(180px 540px at 84% 68%, rgba(0,0,0,.50), transparent 72%),
-        radial-gradient(320px 900px at 50% 105%, rgba(0,0,0,.72), transparent 65%),
-        linear-gradient(180deg, transparent 0%, rgba(0,0,0,.20) 55%, rgba(0,0,0,.55) 100%);
-      filter: blur(1px);
+        radial-gradient(circle at 50% 40%, rgba(0,0,0,.20) 0 40%, rgba(0,0,0,.68) 100%),
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.70));
+      pointer-events:none;
     }
 
-    /* viñeta */
-    .vignette{
-      position:fixed; inset:0; z-index:-1; pointer-events:none;
-      background: radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
-      mix-blend-mode:multiply;
-    }
-
-    /* ===== CONTENIDO ===== */
     main{
       min-height:100vh;
       display:grid;
@@ -94,17 +81,15 @@
       text-align:center;
     }
 
-    /* texto superior tipo "MYMULTIHEALTH.COM" */
     .brand{
       letter-spacing:.22em;
       text-transform:uppercase;
       font-weight:600;
       font-size: clamp(12px, 2vw, 14px);
-      opacity:.85;
+      opacity:.9;
       margin: 0 0 22px;
     }
 
-    /* TITULO estilo foto (serif elegante) */
     h1{
       margin: 0 0 26px;
       font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -118,9 +103,9 @@
       margin: 28px auto 0;
       width:min(720px, 100%);
       padding: 26px 22px;
-      border: 1px solid rgba(247,242,232,.12);
+      border: 1px solid rgba(247,242,232,.14);
       border-radius: 22px;
-      background: rgba(0,0,0,.28);
+      background: rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
     }
@@ -139,12 +124,26 @@
       background: linear-gradient(90deg, transparent, var(--line), transparent);
     }
 
+    .section-title{
+      margin: 22px 0 10px;
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: 40px;
+    }
+
+    .smallline{
+      width: 160px;
+      height: 1px;
+      margin: 12px auto 0;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+    }
+
     .cta{
       display:flex;
       gap:12px;
       justify-content:center;
       flex-wrap:wrap;
-      margin-top: 10px;
+      margin-top: 14px;
     }
 
     a.btn{
@@ -162,37 +161,22 @@
       border-color: rgba(247,242,232,.35);
     }
 
-    .section-title{
-      margin: 34px 0 10px;
-      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      font-weight: 500;
-      font-size: 40px;
-    }
-    .smallline{
-      width: 160px;
-      height: 1px;
-      margin: 12px auto 0;
-      background: linear-gradient(90deg, transparent, var(--line), transparent);
-    }
-
     footer{
-      margin-top: 32px;
+      margin-top: 22px;
       font-size: 12px;
-      opacity: .7;
+      opacity: .75;
     }
   </style>
 </head>
 
 <body>
   <div class="bg"></div>
-  <div class="mist"></div>
-  <div class="leaves"></div>
-  <div class="vignette"></div>
+  <div class="bg-blur"></div>
+  <div class="overlay"></div>
 
   <main>
     <div class="wrap">
       <div class="brand">MYMULTIHEALTH.COM</div>
-
       <h1>Próximo lanzamiento</h1>
 
       <div class="card">
@@ -206,11 +190,8 @@
         <div class="section-title">Contact Us</div>
         <div class="smallline"></div>
 
-        <div class="cta" aria-label="contacto">
+        <div class="cta">
           <a class="btn" href="mailto:contacto@mymultihealth.com">Email</a>
-          <a class="btn" href="https://mymultiplatform.github.io/mymultihealth/" target="_blank" rel="noreferrer">
-            Ver versión GitHub
-          </a>
         </div>
 
         <footer>© <span id="y"></span> mymultihealth.com</footer>
@@ -223,4 +204,3 @@
   </script>
 </body>
 </html>
-
