@@ -3,10 +3,224 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hello World</title>
+  <title>mymultihealth.com</title>
+
+  <!-- Fuente estilo editorial (muy parecida al "Próximo lanzamiento") -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --txt:#f7f2e8;
+      --muted:rgba(247,242,232,.82);
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
+      --line: rgba(247,242,232,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--txt);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#06140e;
+      overflow-x:hidden;
+    }
+
+    /* ===== FONDO AMAZONICO (sin imágenes) ===== */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      background:
+        radial-gradient(1200px 800px at 70% 0%, rgba(140,255,205,.18), transparent 55%),
+        radial-gradient(1000px 700px at 10% 20%, rgba(40,180,120,.22), transparent 60%),
+        linear-gradient(180deg, #06140e 0%, #081a12 35%, #040b08 100%);
+    }
+
+    /* neblina / humedad */
+    .mist{
+      position:fixed;
+      inset:-20%;
+      z-index:-2;
+      background:
+        radial-gradient(closest-side at 30% 40%, rgba(255,255,255,.08), transparent 60%),
+        radial-gradient(closest-side at 70% 55%, rgba(255,255,255,.06), transparent 62%),
+        radial-gradient(closest-side at 45% 75%, rgba(255,255,255,.05), transparent 65%);
+      filter: blur(18px);
+      opacity:.65;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift{
+      from{ transform: translate3d(-2%, -1%, 0) }
+      to{   transform: translate3d( 2%,  1%, 0) }
+    }
+
+    /* hojas gigantes (siluetas) */
+    .leaves{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      opacity:.85;
+      pointer-events:none;
+      background:
+        radial-gradient(140px 420px at 8% 55%, rgba(0,0,0,.55), transparent 70%),
+        radial-gradient(160px 520px at 16% 65%, rgba(0,0,0,.50), transparent 72%),
+        radial-gradient(220px 700px at 92% 55%, rgba(0,0,0,.55), transparent 70%),
+        radial-gradient(180px 540px at 84% 68%, rgba(0,0,0,.50), transparent 72%),
+        radial-gradient(320px 900px at 50% 105%, rgba(0,0,0,.72), transparent 65%),
+        linear-gradient(180deg, transparent 0%, rgba(0,0,0,.20) 55%, rgba(0,0,0,.55) 100%);
+      filter: blur(1px);
+    }
+
+    /* viñeta */
+    .vignette{
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background: radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+      mix-blend-mode:multiply;
+    }
+
+    /* ===== CONTENIDO ===== */
+    main{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:48px 18px;
+    }
+
+    .wrap{
+      width:min(980px, 100%);
+      text-align:center;
+    }
+
+    /* texto superior tipo "MYMULTIHEALTH.COM" */
+    .brand{
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-weight:600;
+      font-size: clamp(12px, 2vw, 14px);
+      opacity:.85;
+      margin: 0 0 22px;
+    }
+
+    /* TITULO estilo foto (serif elegante) */
+    h1{
+      margin: 0 0 26px;
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 1.05;
+      text-shadow: 0 20px 70px rgba(0,0,0,.55);
+    }
+
+    .card{
+      margin: 28px auto 0;
+      width:min(720px, 100%);
+      padding: 26px 22px;
+      border: 1px solid rgba(247,242,232,.12);
+      border-radius: 22px;
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height:1.6;
+    }
+
+    .divider{
+      width: 180px;
+      height: 1px;
+      margin: 18px auto 20px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+    }
+
+    .cta{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    a.btn{
+      text-decoration:none;
+      color: var(--txt);
+      border: 1px solid rgba(247,242,232,.22);
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    a.btn:hover{
+      transform: translateY(-1px);
+      background: rgba(0,0,0,.35);
+      border-color: rgba(247,242,232,.35);
+    }
+
+    .section-title{
+      margin: 34px 0 10px;
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: 40px;
+    }
+    .smallline{
+      width: 160px;
+      height: 1px;
+      margin: 12px auto 0;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+    }
+
+    footer{
+      margin-top: 32px;
+      font-size: 12px;
+      opacity: .7;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Hello World 👋</h1>
-  <p>Mi sitio ya está en GitHub Pages.</p>
+  <div class="bg"></div>
+  <div class="mist"></div>
+  <div class="leaves"></div>
+  <div class="vignette"></div>
+
+  <main>
+    <div class="wrap">
+      <div class="brand">MYMULTIHEALTH.COM</div>
+
+      <h1>Próximo lanzamiento</h1>
+
+      <div class="card">
+        <p class="sub">
+          Estamos preparando una experiencia enfocada en salud y bienestar.
+          Muy pronto tendrás noticias.
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="section-title">Contact Us</div>
+        <div class="smallline"></div>
+
+        <div class="cta" aria-label="contacto">
+          <a class="btn" href="mailto:contacto@mymultihealth.com">Email</a>
+          <a class="btn" href="https://mymultiplatform.github.io/mymultihealth/" target="_blank" rel="noreferrer">
+            Ver versión GitHub
+          </a>
+        </div>
+
+        <footer>© <span id="y"></span> mymultihealth.com</footer>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
