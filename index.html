@@ -166,6 +166,165 @@
       font-size: 12px;
       opacity: .75;
     }
+
+    .launch-banner{
+      margin: 0 auto 16px;
+      width: min(760px, 100%);
+      border: 1px solid rgba(247,242,232,.18);
+      border-radius: 12px;
+      background: rgba(23, 95, 58, 0.42);
+      padding: 10px 14px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .launch-banner a{
+      color: var(--txt);
+      text-decoration: none;
+      border: 1px solid rgba(247,242,232,.28);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      background: rgba(0,0,0,.25);
+    }
+
+    .categories{
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cat{
+      border: 1px solid rgba(247,242,232,.18);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.28);
+      text-align: left;
+    }
+
+    .cat h4{
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .cat p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .trust{
+      margin-top: 16px;
+      text-align: left;
+      border: 1px solid rgba(247,242,232,.16);
+      border-radius: 14px;
+      background: rgba(0,0,0,.25);
+      padding: 12px;
+    }
+
+    .trust h4{
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .trust ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .waitlist{
+      margin-top: 16px;
+      text-align: left;
+      border: 1px solid rgba(247,242,232,.16);
+      border-radius: 14px;
+      background: rgba(0,0,0,.25);
+      padding: 12px;
+    }
+
+    .waitlist h4{
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .waitlist p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .waitlist-row{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .waitlist input{
+      flex: 1 1 240px;
+      min-width: 220px;
+      border-radius: 10px;
+      border: 1px solid rgba(247,242,232,.25);
+      background: rgba(0,0,0,.45);
+      color: var(--txt);
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
+    .waitlist button{
+      border-radius: 10px;
+      border: 1px solid rgba(247,242,232,.28);
+      background: rgba(23,95,58,.6);
+      color: var(--txt);
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .waitlist-note{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(247,242,232,.75);
+    }
+
+    .policy-links{
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .policy-links a{
+      color: var(--txt);
+      text-decoration: none;
+      font-size: 13px;
+      border: 1px solid rgba(247,242,232,.20);
+      border-radius: 10px;
+      padding: 7px 10px;
+      background: rgba(0,0,0,.22);
+    }
+
+    .status-msg{
+      margin-top: 8px;
+      font-size: 13px;
+      color: #d3ffde;
+      min-height: 18px;
+    }
+
+    @media (max-width: 780px){
+      .categories{
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -178,17 +337,65 @@
     <div class="wrap">
       <div class="brand">MYMULTIHEALTH.COM</div>
       <h1>Próximo lanzamiento</h1>
+      <div class="launch-banner">
+        <span>Descuento de lanzamiento: 15% para los primeros suscriptores.</span>
+        <a href="#waitlist">Unirme a la lista</a>
+      </div>
 
       <div class="card">
         <p class="sub">
-          Estamos preparando una experiencia enfocada en salud y bienestar.
-          Muy pronto tendrás noticias.
+          Tienda de salud y bienestar con enfoque práctico: suplementos de uso diario,
+          productos para recuperación y apoyo natural para sueño/energía.
         </p>
 
         <div class="divider"></div>
 
-        <div class="section-title">Contact Us</div>
+        <div class="section-title">Top categorías</div>
         <div class="smallline"></div>
+
+        <div class="categories">
+          <div class="cat">
+            <h4>Inmunidad</h4>
+            <p>Vitaminas y fórmulas base para defensas y rutina diaria.</p>
+          </div>
+          <div class="cat">
+            <h4>Sueño y recuperación</h4>
+            <p>Productos enfocados en descanso, relajación y recuperación.</p>
+          </div>
+          <div class="cat">
+            <h4>Energía y enfoque</h4>
+            <p>Opciones para productividad, claridad mental y rendimiento diario.</p>
+          </div>
+        </div>
+
+        <div class="trust">
+          <h4>Confianza y soporte</h4>
+          <ul>
+            <li>Envíos en 2-5 días hábiles dentro de EE.UU. (objetivo de lanzamiento).</li>
+            <li>Devoluciones dentro de 30 días en productos elegibles.</li>
+            <li>Soporte por email: contacto@mymultihealth.com</li>
+          </ul>
+        </div>
+
+        <div class="waitlist" id="waitlist">
+          <h4>Obtén 15% de descuento en lanzamiento</h4>
+          <p>Deja tu email y te enviamos código de descuento cuando abramos ventas.</p>
+          <form id="waitlistForm">
+            <div class="waitlist-row">
+              <input id="waitlistEmail" type="email" name="email" placeholder="tuemail@ejemplo.com" required />
+              <button type="submit">Quiero mi descuento</button>
+            </div>
+          </form>
+          <div class="waitlist-note">Al unirte aceptas recibir emails de lanzamiento y ofertas de MyMultiHealth.</div>
+          <div class="status-msg" id="statusMsg"></div>
+        </div>
+
+        <div class="policy-links">
+          <a href="shipping.html">Envíos</a>
+          <a href="returns.html">Devoluciones</a>
+          <a href="privacy.html">Privacidad</a>
+          <a href="terms.html">Términos</a>
+        </div>
 
         <div class="cta">
           <a class="btn" href="mailto:contacto@mymultihealth.com">Email</a>
@@ -201,6 +408,26 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Static-site friendly capture: opens email draft with captured address.
+    const waitlistForm = document.getElementById("waitlistForm");
+    const waitlistEmail = document.getElementById("waitlistEmail");
+    const statusMsg = document.getElementById("statusMsg");
+
+    waitlistForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = waitlistEmail.value.trim();
+      if (!email) {
+        statusMsg.textContent = "Ingresa un email válido.";
+        return;
+      }
+
+      const subject = encodeURIComponent("MyMultiHealth Launch Waitlist");
+      const body = encodeURIComponent("Add this email to launch waitlist: " + email);
+      window.location.href = "mailto:contacto@mymultihealth.com?subject=" + subject + "&body=" + body;
+      statusMsg.textContent = "Perfecto. Te estamos registrando para el descuento de lanzamiento.";
+      waitlistForm.reset();
+    });
   </script>
 </body>
 </html>
