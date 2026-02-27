@@ -329,6 +329,38 @@
       padding-top: 12px;
     }
 
+    .paypal-wrap {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .paypal-wrap h4 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--accent-2);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .paypal-note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .paypal-fallback {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--accent-2);
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
     .trust ul {
       margin: 0;
       padding-left: 18px;
@@ -529,6 +561,13 @@
           <button class="btn" id="clearCart">Clear Cart</button>
         </div>
 
+        <div class="paypal-wrap">
+          <h4>Pay With PayPal</h4>
+          <div id="paypal-container-TKHGUACNALK36"></div>
+          <p class="paypal-note">Secure PayPal checkout button. If it does not load, use the direct payment page.</p>
+          <a class="paypal-fallback" href="https://mymultiplatform.com/payment.rent.html" target="_blank" rel="noopener">Open Direct PayPal Page</a>
+        </div>
+
         <p class="small">Checkout sends a prefilled order email to <strong>contacto@mymultihealth.com</strong>.</p>
 
         <div class="field-grid">
@@ -560,6 +599,9 @@
     © <span id="year"></span> MyMultiHealth.com
   </footer>
 
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAAx03ObpCojX7vybdYnlXS_oi_HHV_tkE7qbrn2wUcl6U3bQYPSL_dSf0ku1iQ1CMYBN8EhbYJQzKrDfA&components=hosted-buttons&enable-funding=venmo&currency=USD">
+  </script>
   <script>
     const cart = {};
     const productMap = {
@@ -714,8 +756,26 @@
       renderCart();
     });
 
+    function renderPayPalHostedButton() {
+      const selector = "#paypal-container-TKHGUACNALK36";
+      const container = document.querySelector(selector);
+      if (!container) return;
+
+      if (!window.paypal || !paypal.HostedButtons) {
+        container.innerHTML = "<p class='paypal-note'>PayPal is temporarily unavailable. Use the direct payment link below.</p>";
+        return;
+      }
+
+      paypal.HostedButtons({
+        hostedButtonId: "TKHGUACNALK36"
+      }).render(selector).catch(() => {
+        container.innerHTML = "<p class='paypal-note'>PayPal button failed to load. Use the direct payment link below.</p>";
+      });
+    }
+
     document.getElementById("year").textContent = new Date().getFullYear();
     renderCart();
+    renderPayPalHostedButton();
   </script>
 </body>
 </html>
