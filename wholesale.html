@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wholesale | MyMultiHealth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1210;
+      --bg-2: #131c18;
+      --card: rgba(255, 255, 255, 0.04);
+      --line: rgba(188, 219, 206, 0.25);
+      --txt: #edf7f2;
+      --muted: #bdd0c7;
+      --accent: #72eab7;
+      --max: 1080px;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Sora, "Trebuchet MS", sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(circle at 0% 0%, #1f3e31 0%, transparent 42%),
+        radial-gradient(circle at 90% 0%, #132a22 0%, transparent 40%),
+        linear-gradient(180deg, var(--bg-2), var(--bg));
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(var(--max), 100% - 28px);
+      margin-inline: auto;
+    }
+
+    header {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(13, 18, 16, 0.72);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 8;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav a {
+      color: var(--txt);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    main {
+      padding: 26px 0 36px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(36px, 6vw, 54px);
+      line-height: 0.98;
+    }
+
+    .lead {
+      margin: 0 0 20px;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+
+    .pack {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .label {
+      width: fit-content;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .pack h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .pack p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .price {
+      margin-top: auto;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: transparent;
+      color: var(--txt);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn.primary {
+      border-color: transparent;
+      background: linear-gradient(90deg, #4ece92, #66e4ad);
+      color: #062115;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .form {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form input,
+    .form textarea,
+    .form select {
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--txt);
+      padding: 9px 10px;
+      font-size: 13px;
+    }
+
+    .form textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .small {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .mini {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 920px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">MyMultiHealth.com</a>
+      <a href="index.html">Retail Store</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Wholesale Partner Packs</h1>
+    <p class="lead">
+      Start with a small stock test and validate demand in your clinic, studio, or wellness shop.
+      MyMultiHealth partner packs include the Copper Toothbrush, Smile Training Mouth Pad, and UV Tool Sanitizer Light.
+    </p>
+
+    <section class="grid">
+      <article class="pack">
+        <span class="label">Starter</span>
+        <h2>Pilot Pack</h2>
+        <p>5 Copper Toothbrush + 3 Smile Training Mouth Pad + 2 UV Tool Sanitizer Light.</p>
+        <p>Estimated retail value: <strong>$260</strong>. Good for first-week testing.</p>
+        <div class="price">$182</div>
+        <button class="btn" data-pack="Pilot Pack ($182)">Select Pack</button>
+      </article>
+
+      <article class="pack">
+        <span class="label">Most Popular</span>
+        <h2>Growth Pack</h2>
+        <p>10 Copper Toothbrush + 6 Smile Training Mouth Pad + 4 UV Tool Sanitizer Light.</p>
+        <p>Estimated retail value: <strong>$520</strong>. Built for recurring customer flow.</p>
+        <div class="price">$349</div>
+        <button class="btn primary" data-pack="Growth Pack ($349)">Select Pack</button>
+      </article>
+
+      <article class="pack">
+        <span class="label">Scale</span>
+        <h2>Studio Pack</h2>
+        <p>20 Copper Toothbrush + 12 Smile Training Mouth Pad + 8 UV Tool Sanitizer Light.</p>
+        <p>Estimated retail value: <strong>$1,040</strong>. Better for multi-chair locations.</p>
+        <div class="price">$669</div>
+        <button class="btn" data-pack="Studio Pack ($669)">Select Pack</button>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h3>Request Wholesale Onboarding</h3>
+      <div class="form">
+        <input id="bizName" type="text" placeholder="Business name (required)" />
+        <input id="contactName" type="text" placeholder="Contact name (required)" />
+        <input id="contactEmail" type="email" placeholder="Business email (required)" />
+        <input id="contactPhone" type="text" placeholder="Phone number" />
+        <input id="city" type="text" placeholder="City / State" />
+        <select id="selectedPack">
+          <option value="">Choose a pack</option>
+          <option value="Pilot Pack ($182)">Pilot Pack ($182)</option>
+          <option value="Growth Pack ($349)">Growth Pack ($349)</option>
+          <option value="Studio Pack ($669)">Studio Pack ($669)</option>
+        </select>
+        <textarea id="notes" placeholder="Notes (team size, monthly volume, timeline)"></textarea>
+        <button class="btn primary" id="emailCta">Send Wholesale Request</button>
+        <button class="btn" id="copyCta">Copy Request Text</button>
+      </div>
+      <p class="small">Response target: within 24 hours at <strong>contacto@mymultihealth.com</strong>.</p>
+      <div class="mini">
+        Product messaging is for wellness and hygiene support. Not a replacement for medical diagnosis or treatment.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function value(id) {
+      return (document.getElementById(id)?.value || "").trim();
+    }
+
+    function requestText() {
+      return [
+        "MyMultiHealth Wholesale Request",
+        "",
+        `Business Name: ${value("bizName") || "Not provided"}`,
+        `Contact Name: ${value("contactName") || "Not provided"}`,
+        `Email: ${value("contactEmail") || "Not provided"}`,
+        `Phone: ${value("contactPhone") || "Not provided"}`,
+        `City/State: ${value("city") || "Not provided"}`,
+        `Selected Pack: ${value("selectedPack") || "Not provided"}`,
+        `Notes: ${value("notes") || "None"}`,
+      ].join("\n");
+    }
+
+    document.querySelectorAll("[data-pack]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.getElementById("selectedPack").value = btn.dataset.pack || "";
+      });
+    });
+
+    document.getElementById("emailCta").addEventListener("click", () => {
+      const biz = value("bizName");
+      const name = value("contactName");
+      const email = value("contactEmail");
+      const pack = value("selectedPack");
+      if (!biz || !name || !email || !pack) {
+        alert("Please fill business name, contact name, email, and pack.");
+        return;
+      }
+      const subject = encodeURIComponent(`Wholesale Request - ${biz}`);
+      const body = encodeURIComponent(requestText());
+      window.location.href = `mailto:contacto@mymultihealth.com?subject=${subject}&body=${body}`;
+    });
+
+    document.getElementById("copyCta").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(requestText());
+        alert("Request copied. Paste into email or WhatsApp.");
+      } catch (_err) {
+        alert("Copy failed. Use Send Wholesale Request instead.");
+      }
+    });
+  </script>
+</body>
+</html>

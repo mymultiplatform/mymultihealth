@@ -1,433 +1,721 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>mymultihealth.com</title>
-
-  <!-- Fuente elegante tipo la de tu ejemplo -->
+  <title>MyMultiHealth Store</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --txt:#f7f2e8;
-      --muted:rgba(247,242,232,.82);
-      --line: rgba(247,242,232,.35);
-      --shadow: 0 30px 90px rgba(0,0,0,.55);
-      --img: url("https://blogger.googleusercontent.com/img/a/AVvXsEjFjKk2Ml7Pn20K-zZJ9LZUCEjAQ7JfI84wzNpdhY4doYqAH3XjkjsYYKTVk-PBGbflqkEGwAoq49EZ8zG0YnpDioL0cdgceTr9PoL9OO538vPywGEr_loK3ow3Y8Pw8u1U4n1WSIqifkYEDTtTXc0PCy0bCJsbDfjwyOcV0KVAYR9K30yZj7nP-2jZDP4v");
+    :root {
+      --bg: #0a0e0d;
+      --bg-2: #111a17;
+      --card: #101514;
+      --line: rgba(188, 219, 206, 0.25);
+      --txt: #edf7f2;
+      --muted: #b9ccc3;
+      --accent: #4ad697;
+      --accent-2: #82f5c5;
+      --danger: #ff8a8a;
+      --radius: 16px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      --max: 1140px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      color:var(--txt);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:#000;
-      overflow-x:hidden;
-    }
-
-    /* ===== BACKGROUND (imagen) ===== */
-    .bg{
-      position:fixed;
-      inset:0;
-      z-index:-3;
-      background-image: var(--img);
-      background-size: cover;
-      background-position: center;
-      transform: scale(1.03); /* evita bordes blancos al blur */
-    }
-
-    /* ===== PERIMETRO BORROSO =====
-       Capa con la misma imagen, blur, y máscara para afectar SOLO los bordes */
-    .bg-blur{
-      position:fixed;
-      inset:-2%;
-      z-index:-2;
-      background-image: var(--img);
-      background-size: cover;
-      background-position: center;
-      filter: blur(18px);
-      transform: scale(1.08);
-
-      /* Máscara: centro nítido (transparent), bordes visibles (black) */
-      -webkit-mask-image: radial-gradient(circle at 50% 45%, transparent 0 46%, black 68% 100%);
-      mask-image: radial-gradient(circle at 50% 45%, transparent 0 46%, black 68% 100%);
-      opacity: .95;
-    }
-
-    /* Oscurecer un poco para que el texto se lea */
-    .overlay{
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      background:
-        radial-gradient(circle at 50% 40%, rgba(0,0,0,.20) 0 40%, rgba(0,0,0,.68) 100%),
-        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.70));
-      pointer-events:none;
-    }
-
-    main{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      padding:48px 18px;
-    }
-
-    .wrap{
-      width:min(980px, 100%);
-      text-align:center;
-    }
-
-    .brand{
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      font-weight:600;
-      font-size: clamp(12px, 2vw, 14px);
-      opacity:.9;
-      margin: 0 0 22px;
-    }
-
-    h1{
-      margin: 0 0 26px;
-      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      font-weight: 500;
-      font-size: clamp(44px, 7vw, 78px);
-      line-height: 1.05;
-      text-shadow: 0 20px 70px rgba(0,0,0,.55);
-    }
-
-    .card{
-      margin: 28px auto 0;
-      width:min(720px, 100%);
-      padding: 26px 22px;
-      border: 1px solid rgba(247,242,232,.14);
-      border-radius: 22px;
-      background: rgba(0,0,0,.35);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-    }
-
-    .sub{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height:1.6;
-    }
-
-    .divider{
-      width: 180px;
-      height: 1px;
-      margin: 18px auto 20px;
-      background: linear-gradient(90deg, transparent, var(--line), transparent);
-    }
-
-    .section-title{
-      margin: 22px 0 10px;
-      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      font-weight: 500;
-      font-size: 40px;
-    }
-
-    .smallline{
-      width: 160px;
-      height: 1px;
-      margin: 12px auto 0;
-      background: linear-gradient(90deg, transparent, var(--line), transparent);
-    }
-
-    .cta{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 14px;
-    }
-
-    a.btn{
-      text-decoration:none;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Sora, "Trebuchet MS", sans-serif;
       color: var(--txt);
-      border: 1px solid rgba(247,242,232,.22);
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: rgba(0,0,0,.25);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    a.btn:hover{
-      transform: translateY(-1px);
-      background: rgba(0,0,0,.35);
-      border-color: rgba(247,242,232,.35);
+      background:
+        radial-gradient(circle at 20% 10%, #183228 0%, transparent 40%),
+        radial-gradient(circle at 80% 0%, #10261f 0%, transparent 42%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+      min-height: 100vh;
     }
 
-    footer{
-      margin-top: 22px;
-      font-size: 12px;
-      opacity: .75;
+    .container {
+      width: min(var(--max), 100% - 28px);
+      margin-inline: auto;
     }
 
-    .launch-banner{
-      margin: 0 auto 16px;
-      width: min(760px, 100%);
-      border: 1px solid rgba(247,242,232,.18);
-      border-radius: 12px;
-      background: rgba(23, 95, 58, 0.42);
-      padding: 10px 14px;
-      font-size: 14px;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(10, 14, 13, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 72px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-2);
+    }
+
+    .nav-links {
+      display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .launch-banner a{
-      color: var(--txt);
+    .chip {
       text-decoration: none;
-      border: 1px solid rgba(247,242,232,.28);
-      border-radius: 10px;
+      color: var(--txt);
+      border: 1px solid var(--line);
+      border-radius: 999px;
       padding: 8px 12px;
       font-size: 13px;
-      background: rgba(0,0,0,.25);
+      background: rgba(255, 255, 255, 0.02);
     }
 
-    .categories{
-      margin-top: 12px;
+    .hero {
+      padding: 34px 0 18px;
       display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      grid-template-columns: 1.2fr 0.8fr;
     }
 
-    .cat{
-      border: 1px solid rgba(247,242,232,.18);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(0,0,0,.28);
-      text-align: left;
+    .hero-main {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      box-shadow: var(--shadow);
+      padding: 26px 24px;
+      animation: rise-in 0.8s ease both;
     }
 
-    .cat h4{
-      margin: 0 0 6px;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .cat p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    .trust{
-      margin-top: 16px;
-      text-align: left;
-      border: 1px solid rgba(247,242,232,.16);
-      border-radius: 14px;
-      background: rgba(0,0,0,.25);
-      padding: 12px;
-    }
-
-    .trust h4{
-      margin: 0 0 8px;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .trust ul{
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .waitlist{
-      margin-top: 16px;
-      text-align: left;
-      border: 1px solid rgba(247,242,232,.16);
-      border-radius: 14px;
-      background: rgba(0,0,0,.25);
-      padding: 12px;
-    }
-
-    .waitlist h4{
-      margin: 0 0 6px;
-      font-size: 16px;
-    }
-
-    .waitlist p{
+    h1 {
       margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 14px;
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(42px, 7vw, 64px);
+      line-height: 0.95;
     }
 
-    .waitlist-row{
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 15px;
+      max-width: 64ch;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .waitlist input{
-      flex: 1 1 240px;
-      min-width: 220px;
-      border-radius: 10px;
-      border: 1px solid rgba(247,242,232,.25);
-      background: rgba(0,0,0,.45);
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: transparent;
       color: var(--txt);
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-
-    .waitlist button{
-      border-radius: 10px;
-      border: 1px solid rgba(247,242,232,.28);
-      background: rgba(23,95,58,.6);
-      color: var(--txt);
-      padding: 10px 14px;
+      text-decoration: none;
       font-weight: 700;
+      font-size: 14px;
+      padding: 11px 14px;
       cursor: pointer;
     }
 
-    .waitlist-note{
-      margin-top: 8px;
-      font-size: 12px;
-      color: rgba(247,242,232,.75);
+    .btn.primary {
+      background: linear-gradient(90deg, #33b57a, #41cf8f);
+      color: #05130d;
+      border-color: transparent;
     }
 
-    .policy-links{
-      margin-top: 12px;
+    .hero-side {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(74, 214, 151, 0.1), rgba(74, 214, 151, 0.03));
+      padding: 18px;
+      animation: rise-in 0.9s ease both;
+    }
+
+    .hero-side h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .layout {
+      padding: 10px 0 32px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr 340px;
+      align-items: start;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .product {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 14px;
       display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 320px;
+      animation: rise-in 0.75s ease both;
+    }
+
+    .product:nth-child(2) {
+      animation-delay: 0.08s;
+    }
+
+    .product:nth-child(3) {
+      animation-delay: 0.16s;
+    }
+
+    .badge {
+      width: fit-content;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid var(--line);
+      color: var(--accent-2);
+    }
+
+    .product h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .product p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .meta {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-2);
+    }
+
+    .qty-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .qty-row input {
+      width: 72px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--txt);
+      padding: 8px;
+      font-weight: 700;
+    }
+
+    .product .btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .cart {
+      position: sticky;
+      top: 88px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      animation: rise-in 1s ease both;
+    }
+
+    .cart h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .cart-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      max-height: 280px;
+      overflow: auto;
+    }
+
+    .cart-list li {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px;
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .cart-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .cart-row strong {
+      font-size: 18px;
+      color: var(--accent-2);
+    }
+
+    .small {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .warn {
+      color: var(--danger);
+    }
+
+    .trust {
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .trust ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .bundle-row {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .field-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .field-grid input,
+    .field-grid textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--txt);
+      padding: 9px 10px;
+      font-size: 13px;
+    }
+
+    .field-grid textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    footer {
+      padding: 18px 0 32px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .policy-links {
+      display: flex;
+      justify-content: center;
       gap: 8px;
       flex-wrap: wrap;
+      margin-bottom: 10px;
     }
 
-    .policy-links a{
+    .policy-links a {
       color: var(--txt);
       text-decoration: none;
-      font-size: 13px;
-      border: 1px solid rgba(247,242,232,.20);
-      border-radius: 10px;
-      padding: 7px 10px;
-      background: rgba(0,0,0,.22);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
     }
 
-    .status-msg{
-      margin-top: 8px;
-      font-size: 13px;
-      color: #d3ffde;
-      min-height: 18px;
-    }
-
-    @media (max-width: 780px){
-      .categories{
-        grid-template-columns: 1fr;
+    @keyframes rise-in {
+      from {
+        transform: translateY(18px);
+        opacity: 0;
       }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .layout { grid-template-columns: 1fr; }
+      .cart { position: static; }
+      .products { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .products { grid-template-columns: 1fr; }
+      .nav { height: auto; padding: 12px 0; align-items: flex-start; }
+      .nav-links { justify-content: flex-start; }
     }
   </style>
 </head>
-
 <body>
-  <div class="bg"></div>
-  <div class="bg-blur"></div>
-  <div class="overlay"></div>
+  <header>
+    <div class="container nav">
+      <div class="brand">MyMultiHealth.com</div>
+      <div class="nav-links">
+        <a class="chip" href="#products">Products</a>
+        <a class="chip" href="#cart">Cart</a>
+        <a class="chip" href="wholesale.html">Wholesale</a>
+        <a class="chip" href="mailto:contacto@mymultihealth.com">Support</a>
+      </div>
+    </div>
+  </header>
 
-  <main>
-    <div class="wrap">
-      <div class="brand">MYMULTIHEALTH.COM</div>
-      <h1>Próximo lanzamiento</h1>
-      <div class="launch-banner">
-        <span>Descuento de lanzamiento: 15% para los primeros suscriptores.</span>
-        <a href="#waitlist">Unirme a la lista</a>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Store Is Live</h1>
+        <p class="lead">
+          MyMultiHealth is now selling your first product line: a copper toothbrush,
+          your smile training mouth pad invention, and a UV light for tool sanitation.
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#products">Shop Now</a>
+          <a class="btn" href="wholesale.html">View Wholesale Packs</a>
+          <a class="btn" href="mailto:contacto@mymultihealth.com?subject=Wholesale%20Inquiry">Wholesale Inquiry</a>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <h3>Launch Bundle</h3>
+        <ul>
+          <li>Any 2 products: 10% discount</li>
+          <li>All 3 products: 15% discount</li>
+          <li>Fast founder support via email</li>
+        </ul>
+        <div class="bundle-row">
+          <button class="btn" id="bundle2">Add 2-Product Bundle</button>
+          <button class="btn primary" id="bundle3">Add Full 3-Product Bundle</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="layout">
+      <div>
+        <h2 class="section-title" id="products">Featured Products</h2>
+        <div class="products">
+          <article class="product" data-id="copper-brush" data-name="Copper Toothbrush" data-price="19">
+            <span class="badge">Oral Care</span>
+            <h3>Copper Toothbrush</h3>
+            <p>Durable copper-handle toothbrush designed for daily use and long-term value.</p>
+            <p>Includes: 1 brush handle + replacement head starter pack.</p>
+            <div class="meta">
+              <div class="price">$19</div>
+            </div>
+            <div class="qty-row">
+              <label for="qty-copper">Qty</label>
+              <input id="qty-copper" type="number" min="1" value="1" />
+            </div>
+            <button class="btn primary add-btn" data-qty="qty-copper">Add To Cart</button>
+          </article>
+
+          <article class="product" data-id="smile-pad" data-name="Smile Training Mouth Pad" data-price="29">
+            <span class="badge">Founder Product</span>
+            <h3>Smile Training Mouth Pad</h3>
+            <p>Invented by Dante. Designed to support smile posture training routines and consistency habits.</p>
+            <p class="warn">For wellness/training use only. Not a medical device.</p>
+            <div class="meta">
+              <div class="price">$29</div>
+            </div>
+            <div class="qty-row">
+              <label for="qty-smile">Qty</label>
+              <input id="qty-smile" type="number" min="1" value="1" />
+            </div>
+            <button class="btn primary add-btn" data-qty="qty-smile">Add To Cart</button>
+          </article>
+
+          <article class="product" data-id="uv-light" data-name="UV Tool Sanitizer Light" data-price="39">
+            <span class="badge">Tool Hygiene</span>
+            <h3>UV Tool Sanitizer Light</h3>
+            <p>UV light unit for surface and tool sanitation routines in personal care workflows.</p>
+            <p class="warn">Use according to safety instructions. Keep away from direct eye exposure.</p>
+            <div class="meta">
+              <div class="price">$39</div>
+            </div>
+            <div class="qty-row">
+              <label for="qty-uv">Qty</label>
+              <input id="qty-uv" type="number" min="1" value="1" />
+            </div>
+            <button class="btn primary add-btn" data-qty="qty-uv">Add To Cart</button>
+          </article>
+        </div>
       </div>
 
-      <div class="card">
-        <p class="sub">
-          Tienda de salud y bienestar con enfoque práctico: suplementos de uso diario,
-          productos para recuperación y apoyo natural para sueño/energía.
-        </p>
+      <aside class="cart" id="cart">
+        <h3>Your Cart</h3>
+        <ul class="cart-list" id="cartList">
+          <li>No items yet.</li>
+        </ul>
 
-        <div class="divider"></div>
+        <div class="cart-row"><span>Subtotal</span><strong id="subtotal">$0</strong></div>
+        <div class="cart-row"><span>Launch Discount</span><strong id="discount">$0</strong></div>
+        <div class="cart-row"><span>Total</span><strong id="total">$0</strong></div>
 
-        <div class="section-title">Top categorías</div>
-        <div class="smallline"></div>
+        <div class="hero-cta" style="margin-top:12px;">
+          <button class="btn primary" id="checkoutEmail">Checkout via Email</button>
+          <button class="btn" id="copyOrder">Copy Order Text</button>
+          <button class="btn" id="clearCart">Clear Cart</button>
+        </div>
 
-        <div class="categories">
-          <div class="cat">
-            <h4>Inmunidad</h4>
-            <p>Vitaminas y fórmulas base para defensas y rutina diaria.</p>
-          </div>
-          <div class="cat">
-            <h4>Sueño y recuperación</h4>
-            <p>Productos enfocados en descanso, relajación y recuperación.</p>
-          </div>
-          <div class="cat">
-            <h4>Energía y enfoque</h4>
-            <p>Opciones para productividad, claridad mental y rendimiento diario.</p>
-          </div>
+        <p class="small">Checkout sends a prefilled order email to <strong>contacto@mymultihealth.com</strong>.</p>
+
+        <div class="field-grid">
+          <input id="customerName" type="text" placeholder="Full Name (required)" />
+          <input id="customerEmail" type="email" placeholder="Email (required)" />
+          <input id="customerPhone" type="text" placeholder="Phone Number" />
+          <input id="customerCity" type="text" placeholder="Shipping City" />
+          <textarea id="customerNotes" placeholder="Order notes (optional)"></textarea>
         </div>
 
         <div class="trust">
-          <h4>Confianza y soporte</h4>
           <ul>
-            <li>Envíos en 2-5 días hábiles dentro de EE.UU. (objetivo de lanzamiento).</li>
-            <li>Devoluciones dentro de 30 días en productos elegibles.</li>
-            <li>Soporte por email: contacto@mymultihealth.com</li>
+            <li>US shipping target: 2-5 business days.</li>
+            <li>30-day return window for eligible items.</li>
+            <li>Founder support included on all launch orders.</li>
           </ul>
         </div>
-
-        <div class="waitlist" id="waitlist">
-          <h4>Obtén 15% de descuento en lanzamiento</h4>
-          <p>Deja tu email y te enviamos código de descuento cuando abramos ventas.</p>
-          <form id="waitlistForm">
-            <div class="waitlist-row">
-              <input id="waitlistEmail" type="email" name="email" placeholder="tuemail@ejemplo.com" required />
-              <button type="submit">Quiero mi descuento</button>
-            </div>
-          </form>
-          <div class="waitlist-note">Al unirte aceptas recibir emails de lanzamiento y ofertas de MyMultiHealth.</div>
-          <div class="status-msg" id="statusMsg"></div>
-        </div>
-
-        <div class="policy-links">
-          <a href="shipping.html">Envíos</a>
-          <a href="returns.html">Devoluciones</a>
-          <a href="privacy.html">Privacidad</a>
-          <a href="terms.html">Términos</a>
-        </div>
-
-        <div class="cta">
-          <a class="btn" href="mailto:contacto@mymultihealth.com">Email</a>
-        </div>
-
-        <footer>© <span id="y"></span> mymultihealth.com</footer>
-      </div>
-    </div>
+      </aside>
+    </section>
   </main>
 
+  <footer>
+    <div class="policy-links">
+      <a href="shipping.html">Shipping</a>
+      <a href="returns.html">Returns</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    © <span id="year"></span> MyMultiHealth.com
+  </footer>
+
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    const cart = {};
+    const productMap = {
+      "copper-brush": { id: "copper-brush", name: "Copper Toothbrush", price: 19 },
+      "smile-pad": { id: "smile-pad", name: "Smile Training Mouth Pad", price: 29 },
+      "uv-light": { id: "uv-light", name: "UV Tool Sanitizer Light", price: 39 }
+    };
 
-    // Static-site friendly capture: opens email draft with captured address.
-    const waitlistForm = document.getElementById("waitlistForm");
-    const waitlistEmail = document.getElementById("waitlistEmail");
-    const statusMsg = document.getElementById("statusMsg");
+    function money(value) {
+      return `$${value.toFixed(2)}`;
+    }
 
-    waitlistForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const email = waitlistEmail.value.trim();
-      if (!email) {
-        statusMsg.textContent = "Ingresa un email válido.";
+    function getDiscount(subtotal, itemCount) {
+      if (itemCount >= 3) return subtotal * 0.15;
+      if (itemCount >= 2) return subtotal * 0.10;
+      return 0;
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById("cartList");
+      const items = Object.values(cart);
+      const lines = [];
+
+      let subtotal = 0;
+      let itemCount = 0;
+
+      for (const item of items) {
+        const lineTotal = item.price * item.qty;
+        subtotal += lineTotal;
+        itemCount += item.qty;
+        lines.push(`<li><strong>${item.name}</strong><br>Qty: ${item.qty} × ${money(item.price)} = ${money(lineTotal)}</li>`);
+      }
+
+      if (!lines.length) {
+        cartList.innerHTML = "<li>No items yet.</li>";
+      } else {
+        cartList.innerHTML = lines.join("");
+      }
+
+      const discount = getDiscount(subtotal, itemCount);
+      const total = subtotal - discount;
+
+      document.getElementById("subtotal").textContent = money(subtotal);
+      document.getElementById("discount").textContent = `-${money(discount)}`;
+      document.getElementById("total").textContent = money(total);
+    }
+
+    function getCustomerField(id) {
+      const value = (document.getElementById(id)?.value || "").trim();
+      return value || "Not provided";
+    }
+
+    function cartSummaryText() {
+      const items = Object.values(cart);
+      if (!items.length) return "No items selected.";
+
+      let subtotal = 0;
+      let itemCount = 0;
+      const lines = items.map(item => {
+        const lineTotal = item.price * item.qty;
+        subtotal += lineTotal;
+        itemCount += item.qty;
+        return `- ${item.name} | Qty ${item.qty} | ${money(lineTotal)}`;
+      });
+
+      const discount = getDiscount(subtotal, itemCount);
+      const total = subtotal - discount;
+
+      return [
+        "MyMultiHealth Order Request",
+        "",
+        ...lines,
+        "",
+        `Subtotal: ${money(subtotal)}`,
+        `Launch Discount: -${money(discount)}`,
+        `Total: ${money(total)}`,
+        "",
+        `Customer Name: ${getCustomerField("customerName")}`,
+        `Customer Email: ${getCustomerField("customerEmail")}`,
+        `Phone: ${getCustomerField("customerPhone")}`,
+        `Shipping City: ${getCustomerField("customerCity")}`,
+        `Order Notes: ${getCustomerField("customerNotes")}`,
+      ].join("\n");
+    }
+
+    function addToCart(id, qty) {
+      const product = productMap[id];
+      if (!product) return;
+      const safeQty = Math.max(1, Number.parseInt(String(qty || 1), 10) || 1);
+      if (!cart[id]) {
+        cart[id] = { ...product, qty: safeQty };
+      } else {
+        cart[id].qty += safeQty;
+      }
+      renderCart();
+    }
+
+    document.querySelectorAll(".add-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".product");
+        const qtyInput = document.getElementById(btn.dataset.qty);
+        const qty = Math.max(1, parseInt(qtyInput.value || "1", 10));
+        addToCart(card.dataset.id, qty);
+        qtyInput.value = "1";
+      });
+    });
+
+    document.getElementById("bundle2").addEventListener("click", () => {
+      addToCart("copper-brush", 1);
+      addToCart("smile-pad", 1);
+    });
+
+    document.getElementById("bundle3").addEventListener("click", () => {
+      addToCart("copper-brush", 1);
+      addToCart("smile-pad", 1);
+      addToCart("uv-light", 1);
+    });
+
+    document.getElementById("checkoutEmail").addEventListener("click", () => {
+      const items = Object.values(cart);
+      if (!items.length) {
+        alert("Add at least one product to cart.");
         return;
       }
 
-      const subject = encodeURIComponent("MyMultiHealth Launch Waitlist");
-      const body = encodeURIComponent("Add this email to launch waitlist: " + email);
-      window.location.href = "mailto:contacto@mymultihealth.com?subject=" + subject + "&body=" + body;
-      statusMsg.textContent = "Perfecto. Te estamos registrando para el descuento de lanzamiento.";
-      waitlistForm.reset();
+      const customerName = (document.getElementById("customerName").value || "").trim();
+      const customerEmail = (document.getElementById("customerEmail").value || "").trim();
+      if (!customerName || !customerEmail) {
+        alert("Please add your name and email before checkout.");
+        return;
+      }
+
+      const subject = encodeURIComponent("MyMultiHealth Order Request");
+      const body = encodeURIComponent(cartSummaryText());
+      window.location.href = `mailto:contacto@mymultihealth.com?subject=${subject}&body=${body}`;
     });
+
+    document.getElementById("copyOrder").addEventListener("click", async () => {
+      const text = cartSummaryText();
+      try {
+        await navigator.clipboard.writeText(text);
+        alert("Order text copied. Paste it into DM, WhatsApp, or email.");
+      } catch (_err) {
+        alert("Copy failed. Please use Checkout via Email.");
+      }
+    });
+
+    document.getElementById("clearCart").addEventListener("click", () => {
+      for (const key of Object.keys(cart)) {
+        delete cart[key];
+      }
+      renderCart();
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderCart();
   </script>
 </body>
 </html>
