@@ -228,6 +228,21 @@
       font-size: 14px;
     }
 
+    .product-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .product-gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #0a1111;
+    }
+
     .meta {
       margin-top: auto;
       display: flex;
@@ -500,6 +515,20 @@
         <div class="products">
           <article class="product" data-id="copper-brush" data-name="Copper Toothbrush" data-price="19">
             <span class="badge">Oral Care</span>
+            <div class="product-gallery" aria-label="Copper toothbrush AI images">
+              <img
+                src="https://image.pollinations.ai/prompt/ai%20studio%20product%20photo%20copper%20toothbrush%20premium%20dental%20brand%20clean%20background?seed=8101&width=768&height=768&model=flux"
+                alt="AI concept image of copper toothbrush on clean dental background"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='assets/ai/copper_fallback.svg';"
+              >
+              <img
+                src="https://image.pollinations.ai/prompt/ai%20macro%20closeup%20copper%20toothbrush%20product%20ad%20style%20soft%20lighting?seed=8102&width=768&height=768&model=flux"
+                alt="AI close-up concept image of copper toothbrush product"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='assets/ai/copper_fallback.svg';"
+              >
+            </div>
             <h3>Copper Toothbrush</h3>
             <p>Durable copper-handle toothbrush designed for daily use and long-term value.</p>
             <p>Includes: 1 brush handle + replacement head starter pack.</p>
@@ -515,6 +544,20 @@
 
           <article class="product" data-id="smile-pad" data-name="Smile Training Mouth Pad" data-price="29">
             <span class="badge">Founder Product</span>
+            <div class="product-gallery" aria-label="Smile training pad AI images">
+              <img
+                src="https://image.pollinations.ai/prompt/ai%20product%20render%20smile%20training%20mouth%20pad%20minimal%20wellness%20brand%20shot?seed=8201&width=768&height=768&model=flux"
+                alt="AI concept image of smile training mouth pad product"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='assets/ai/smile_fallback.svg';"
+              >
+              <img
+                src="https://image.pollinations.ai/prompt/ai%20health%20product%20photo%20mouth%20training%20pad%20premium%20advertisement%20lighting?seed=8202&width=768&height=768&model=flux"
+                alt="AI alternate concept image of smile training mouth pad"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='assets/ai/smile_fallback.svg';"
+              >
+            </div>
             <h3>Smile Training Mouth Pad</h3>
             <p>Invented by Dante. Designed to support smile posture training routines and consistency habits.</p>
             <p class="warn">For wellness/training use only. Not a medical device.</p>
@@ -530,6 +573,20 @@
 
           <article class="product" data-id="uv-light" data-name="UV Tool Sanitizer Light" data-price="39">
             <span class="badge">Tool Hygiene</span>
+            <div class="product-gallery" aria-label="UV sanitizer AI images">
+              <img
+                src="https://image.pollinations.ai/prompt/ai%20product%20photo%20uv%20tool%20sanitizer%20light%20clinic%20surface%20clean%20aesthetic?seed=8301&width=768&height=768&model=flux"
+                alt="AI concept image of UV sanitizer light on clean clinic surface"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='assets/ai/uv_fallback.svg';"
+              >
+              <img
+                src="https://image.pollinations.ai/prompt/ai%20futuristic%20uv%20sanitizer%20device%20product%20shot%20wellness%20store%20style?seed=8302&width=768&height=768&model=flux"
+                alt="AI alternate concept image of UV sanitizer light"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='assets/ai/uv_fallback.svg';"
+              >
+            </div>
             <h3>UV Tool Sanitizer Light</h3>
             <p>UV light unit for surface and tool sanitation routines in personal care workflows.</p>
             <p class="warn">Use according to safety instructions. Keep away from direct eye exposure.</p>
